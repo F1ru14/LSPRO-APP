@@ -34,16 +34,16 @@ Setelah semua *container* (Database, App Sertifikasi, dan App Survailen) berhasi
 *(Catatan: Aplikasi Survailen tidak memiliki halaman login mandiri. Jika Anda mengakses halaman dashboard Survailen dalam keadaan belum login, Anda akan otomatis diarahkan ke halaman login Sertifikasi).*
 
 ### 4. Pengaturan Domain Host / SSO (Direkomendasikan)
-Agar fitur Single Sign-On dan tombol Portal antar aplikasi dapat berjalan sempurna saat pengujian di lokal, disarankan menggunakan domain `.localhost`. 
+Agar fitur Single Sign-On dan tombol Portal antar aplikasi dapat berjalan sempurna saat pengujian di lokal, disarankan menggunakan domain `.lspro.test` (karena browser modern sering memblokir cookie di domain `.localhost`).
 Tambahkan konfigurasi berikut ke dalam file `hosts` di sistem operasi Anda (`/etc/hosts` untuk Linux/Mac, atau `C:\Windows\System32\drivers\etc\hosts` untuk Windows):
 
 ```text
-127.0.0.1   sertifikasi.localhost
-127.0.0.1   survailen.localhost
+127.0.0.1   sertifikasi.lspro.test
+127.0.0.1   survailen.lspro.test
 ```
 Setelah menambahkan baris di atas, akses aplikasi menggunakan URL berikut:
-- **Sertifikasi:** http://sertifikasi.localhost:8000
-- **Survailen:** http://survailen.localhost:8001
+- **Sertifikasi:** http://sertifikasi.lspro.test:8000
+- **Survailen:** http://survailen.lspro.test:8001
 
 ---
 

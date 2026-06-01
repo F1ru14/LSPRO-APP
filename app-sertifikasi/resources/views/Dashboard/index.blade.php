@@ -169,7 +169,7 @@
                     <svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                     Jadwal Survailen Terdekat
                 </h2>
-                <a href="http://survailen.localhost:8001/surveilans" class="text-xs text-blue-600 font-semibold hover:underline bg-blue-50 px-3 py-1.5 rounded-lg transition hover:bg-blue-100">Semua Jadwal</a>
+                <a href="http://survailen.lspro.test:8001/surveilans" class="text-xs text-blue-600 font-semibold hover:underline bg-blue-50 px-3 py-1.5 rounded-lg transition hover:bg-blue-100">Semua Jadwal</a>
             </div>
             <div class="overflow-x-auto flex-1">
                 @if(count($surveilansMendatang) > 0)

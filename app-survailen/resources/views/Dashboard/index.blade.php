@@ -214,7 +214,7 @@
                     <svg class="w-5 h-5 mr-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     Sertifikasi Sedang Proses
                 </h2>
-                <a href="http://sertifikasi.localhost:8000/sertifikasi" class="text-xs text-amber-600 font-semibold hover:underline bg-amber-50 px-3 py-1.5 rounded-lg transition hover:bg-amber-100">Cek Semua</a>
+                <a href="http://sertifikasi.lspro.test:8000/sertifikasi" class="text-xs text-amber-600 font-semibold hover:underline bg-amber-50 px-3 py-1.5 rounded-lg transition hover:bg-amber-100">Cek Semua</a>
             </div>
             <div class="overflow-x-auto flex-1">
                 @if(count($sertifikasiTertunda) > 0)

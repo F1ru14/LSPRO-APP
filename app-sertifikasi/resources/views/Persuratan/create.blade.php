@@ -5,7 +5,7 @@
     <div class="flex flex-col md:flex-row md:justify-between items-start md:items-center space-y-4 md:space-y-0 mb-8">
         <div>
             <div class="flex items-center text-sm text-gray-500 mb-2">
-                <a href="http://survailen.localhost:8001/surveilans" class="hover:text-blue-600">Survailen</a>
+                <a href="http://survailen.lspro.test:8001/surveilans" class="hover:text-blue-600">Survailen</a>
                 <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 <span class="text-gray-800">Form Persuratan</span>
             </div>

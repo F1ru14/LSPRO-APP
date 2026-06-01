@@ -106,4 +106,4 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Redirect unauthenticated users to Sertifikasi login
-Route::get('/login', fn() => redirect('http://sertifikasi.localhost:8000/login'))->name('login');
+Route::get('/login', fn() => redirect('http://sertifikasi.lspro.test:8000/login'))->name('login');
