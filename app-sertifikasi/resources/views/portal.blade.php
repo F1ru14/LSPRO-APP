@@ -14,20 +14,16 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
         }
-        .animated-bg {
-            background: linear-gradient(-45deg, #0093ff, #00d2ff, #2a5298, #1e3c72);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-        }
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
     </style>
 </head>
-<body class="animated-bg min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
+<body class="min-h-screen flex items-center justify-center p-6 relative overflow-hidden bg-slate-900">
     
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0 pointer-events-none">
+        <img src="{{ asset('images/bg-portal.png') }}" class="w-full h-full object-cover opacity-20" alt="Background">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/50 to-slate-900/80 mix-blend-multiply"></div>
+    </div>
+
     <!-- Decorative Elements -->
     <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-white/20 rounded-full blur-3xl"></div>
     <div class="absolute bottom-[-10%] right-[-10%] w-[30rem] h-[30rem] bg-cyan-400/20 rounded-full blur-3xl"></div>
