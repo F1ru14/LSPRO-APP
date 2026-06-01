@@ -1,0 +1,125 @@
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .guest-layout-wrapper {
+        @apply min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-[#0FA5F9];
+    }
+    
+    .guest-layout-card {
+        @apply w-full sm:max-w-md mt-6 px-12 py-10 bg-[#f4f6f8] shadow-lg overflow-hidden sm:rounded-md text-center border-t-0;
+    }
+
+    .form-group-margin {
+        @apply mt-6 text-left;
+    }
+    
+    .input-wrapper {
+        @apply relative mt-1 flex items-center;
+    }
+
+    .input-icon-left {
+        @apply absolute left-3 flex items-center text-gray-500;
+    }
+    
+    .password-toggle-btn {
+        @apply absolute right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none transition-colors;
+    }
+
+    .remember-me-container {
+        @apply block mt-2 text-left;
+    }
+    
+    .remember-me-label {
+        @apply inline-flex items-center cursor-pointer;
+    }
+    
+    .remember-me-checkbox {
+        @apply border-gray-400 text-blue-500 shadow-sm focus:ring-blue-500 cursor-pointer w-3.5 h-3.5 bg-transparent rounded-sm;
+    }
+    
+    .remember-me-text {
+        @apply ms-1.5 text-[13px] text-gray-500;
+    }
+
+    .form-actions-container {
+        @apply flex items-center justify-center mt-8;
+    }
+    
+    .login-btn {
+        @apply justify-center px-12 py-2.5 bg-[#4284F4] hover:bg-[#3367D6] text-white text-sm font-bold rounded-full transition-colors shadow-sm tracking-wide;
+    }
+    
+    .custom-text-input {
+        @apply block w-full pl-10 bg-[#E2E8F0] border border-gray-400 text-gray-700 focus:border-[#4284F4] focus:ring-[#4284F4] sm:text-sm py-2.5 rounded-sm shadow-inner;
+    }
+    
+    .input-password {
+        @apply pr-10;
+    }
+
+    .custom-primary-button {
+        @apply hidden;
+    }
+    
+    .custom-input-label {
+        @apply sr-only;
+    }
+}
+
+body { font-family: 'Inter', sans-serif; }
+.bg-custom-blue { background-color: #0093ff; }
+.bg-input-gray { background-color: #dee7ee; }
+.btn-login { background-color: #4285f4; }
+.bg-sidebar { background-color: #0093ff; }
+.bg-active-menu { background-color: rgba(255, 255, 255, 0.2); }
+
+/* Custom styles for React Select */
+.react-select__control {
+    border-color: #d1d5db !important;
+    box-shadow: none !important;
+    border-radius: 0.5rem !important;
+    padding: 0.1rem 0.2rem !important;
+    font-size: 0.875rem !important;
+    background-color: #f9fafb !important;
+}
+
+.react-select__control:hover {
+    border-color: #9ca3af !important;
+}
+
+.react-select__control--is-focused {
+    border-color: #2684ff !important;
+    box-shadow: 0 0 0 1px #2684ff !important;
+}
+
+.react-select__control--is-focused:hover {
+    border-color: #2684ff !important;
+}
+
+.react-select__menu {
+    font-size: 0.875rem !important;
+    border-radius: 0.5rem !important;
+    overflow: hidden !important;
+    z-index: 9999 !important;
+}
+
+.react-select__option {
+    background-color: white !important;
+    color: #374151 !important;
+    cursor: pointer !important;
+}
+
+.react-select__option--is-focused {
+    background-color: #deebff !important;
+    color: #172b4d !important;
+}
+
+/* Override Tailwind Forms default focus styles for React Select inputs */
+.react-auditor-select-container input[type="text"] {
+    box-shadow: none !important;
+    border-color: transparent !important;
+}

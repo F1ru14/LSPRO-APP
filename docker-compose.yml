@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # === Database Server (Shared) ===
+  db:
+    image: mysql:8.0
+    container_name: lspro_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: lsproject
+      MYSQL_ROOT_PASSWORD: password123
+      MYSQL_USER: lspro
+      MYSQL_PASSWORD: akulspro
+    ports:
+      - "3306:3306"
+    volumes:
+      - lspro_mysql_data:/var/lib/mysql
+
+  # === Sertifikasi App ===
+  sertifikasi-app:
+    build:
+      context: ./app-sertifikasi/docker/php
+    container_name: lspro_sertifikasi_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./app-sertifikasi:/var/www
+    depends_on:
+      - db
+
+  sertifikasi-web:
+    image: nginx:alpine
+    container_name: lspro_sertifikasi_web
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./app-sertifikasi:/var/www
+      - ./app-sertifikasi/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - sertifikasi-app
+
+  # === Survailen App ===
+  survailen-app:
+    build:
+      context: ./app-survailen/docker/php
+    container_name: lspro_survailen_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./app-survailen:/var/www
+    depends_on:
+      - db
+
+  survailen-web:
+    image: nginx:alpine
+    container_name: lspro_survailen_web
+    restart: unless-stopped
+    ports:
+      - "8001:80"
+    volumes:
+      - ./app-survailen:/var/www
+      - ./app-survailen/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - survailen-app
+
+volumes:
+  lspro_mysql_data:
