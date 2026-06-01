@@ -7,9 +7,9 @@
             <div class="flex items-center text-sm text-gray-500 mb-2">
                 <a href="#" class="hover:text-blue-600">Menu</a>
                 <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                <span class="text-gray-800">Rekap Data Sertifikasi</span>
+                <span class="text-gray-800">Rekap Data Survailen</span>
             </div>
-            <h1 class="text-2xl font-bold text-gray-800">Rekap Data Sertifikasi</h1>
+            <h1 class="text-2xl font-bold text-gray-800">Rekap Data Survailen</h1>
             <p class="text-gray-500">Pilih kolom-kolom yang ingin Anda sertakan dalam laporan ekspor (Excel).</p>
         </div>
     </div>
@@ -36,12 +36,12 @@
                 <div class="flex flex-col md:flex-row items-center gap-6">
                     <div class="w-full md:w-1/2 flex flex-col sm:flex-row items-center gap-4">
                         <div class="w-full sm:w-1/2">
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Tahun Awal</label>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Tahun Awal Pelaksanaan</label>
                             <input type="number" name="start_year" min="2000" max="2100" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition text-sm" placeholder="Contoh: 2024">
                         </div>
                         <div class="hidden sm:block text-gray-400 mt-6 font-bold">-</div>
                         <div class="w-full sm:w-1/2">
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Tahun Akhir</label>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Tahun Akhir Pelaksanaan</label>
                             <input type="number" name="end_year" min="2000" max="2100" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition text-sm" placeholder="Contoh: 2026">
                         </div>
                     </div>
@@ -61,7 +61,7 @@
             <div class="mb-6 pb-4 border-t border-gray-100 pt-8 flex items-center justify-between">
                 <h2 class="text-lg font-bold text-gray-800 flex items-center">
                     <svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
-                    Daftar Kolom (Field) Sertifikasi
+                    Daftar Kolom (Field) Survailen
                 </h2>
                 <div class="flex items-center space-x-4">
                     <button type="button" onclick="selectAll()" class="text-sm font-semibold text-blue-600 hover:text-blue-800 transition">Pilih Semua</button>

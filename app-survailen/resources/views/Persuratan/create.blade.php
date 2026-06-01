@@ -49,6 +49,7 @@
                                     data-tanggal="{{ $sert->tgl_sertifikasi ?? '' }}"
                                     data-merek="{{ $sert->merk ?? '' }}"
                                     data-kategori="{{ $sert->kategori->nama_kategori ?? '' }}"
+                                    data-sni="{{ $sert->no_sni ?? '' }}"
                                 >
                                     {{ $sert->perusahaan->nama_perusahaan ?? 'Tanpa Nama' }} ({{ $sert->no_sni ?? 'Tanpa SNI' }})
                                 </option>

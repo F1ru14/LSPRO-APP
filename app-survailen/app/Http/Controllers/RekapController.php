@@ -27,38 +27,28 @@ class RekapController extends Controller
         $endYear = $request->input('end_year');
         $selectedKategori = $request->input('id_kategori');
 
-        // Map display column names -> actual table.column (karena data perusahaan sudah di tabel terpisah)
+        // Map display column names -> actual table.column
         $columnMap = [
             'no_referensi' => 'sertifikasi.no_referensi',
             'kategori' => 'kategori.nama_kategori',
             'nama_perusahaan' => 'perusahaan.nama_perusahaan',
             'alamat_kantor' => 'perusahaan.alamat_kantor',
             'telp_kantor' => 'perusahaan.telp_kantor',
-            'fax_kantor' => 'perusahaan.fax_kantor',
             'email' => 'perusahaan.email',
-            'nama_importir' => 'perusahaan.nama_importir',
-            'alamat_importir' => 'perusahaan.alamat_importir',
-            'telp_importir' => 'perusahaan.telp_importir',
-            'fax_importir' => 'perusahaan.fax_importir',
-            'kontak_person' => 'perusahaan.contact_person',
             'komoditi_produk' => 'perusahaan.komoditi',
             'merk' => 'perusahaan.merek',
-            'type_jenis_produk' => 'perusahaan.tipe_produk',
-            'alamat_pabrik' => 'perusahaan.alamat_pabrik',
-            'telp_pabrik' => 'perusahaan.telp_pabrik',
-            'fax_pabrik' => 'perusahaan.fax_pabrik',
-            'tgl_permohonan' => 'sertifikasi.tgl_permohonan',
             'no_sni' => 'sertifikasi.no_sni',
-            'tgl_kontrak' => 'sertifikasi.tgl_kontrak',
-            'tgl_audit_kecukupan' => 'sertifikasi.tgl_audit_kecukupan',
-            'auditor' => "(SELECT GROUP_CONCAT(auditor.nama_auditor SEPARATOR ', ') FROM sertifikasi_auditor JOIN auditor ON sertifikasi_auditor.id_auditor = auditor.id_auditor WHERE sertifikasi_auditor.id_sertifikasi = sertifikasi.id_sertifikasi)",
-            'tgl_mulai_audit_lapangan' => 'sertifikasi.tgl_mulai_audit_lapangan',
-            'tgl_selesai_audit_lapangan' => 'sertifikasi.tgl_selesai_audit_lapangan',
-            'tgl_rapat_teknis' => 'sertifikasi.tgl_rapat_teknis',
-            'tgl_sertifikasi' => 'sertifikasi.tgl_sertifikasi',
-            'lama_sertifikasi' => 'sertifikasi.lama_sertifikasi',
-            'status_permohonan' => 'sertifikasi.status_permohonan',
-            'keterangan' => 'sertifikasi.keterangan',
+            'periode_survailen' => 'surveillance.periode',
+            'tgl_pelaksanaan_survailen' => 'surveillance.tgl_pelaksanaan',
+            'lab_pengujian' => 'lab.nama_lab',
+            'auditor_survailen' => "(SELECT GROUP_CONCAT(auditor.nama_auditor SEPARATOR ', ') FROM surveillance_auditor JOIN auditor ON surveillance_auditor.id_auditor = auditor.id_auditor WHERE surveillance_auditor.id_surveillance = surveillance.id_surveillance)",
+            'ppc_survailen' => "(SELECT GROUP_CONCAT(petugas_pengambil_contoh.nama_ppc SEPARATOR ', ') FROM surveillance_petugas_pengambil_contoh JOIN petugas_pengambil_contoh ON surveillance_petugas_pengambil_contoh.id_ppc = petugas_pengambil_contoh.id_ppc WHERE surveillance_petugas_pengambil_contoh.id_surveillance = surveillance.id_surveillance)",
+            'tgl_pemberitahuan' => "(SELECT MAX(tgl_terbit) FROM surat WHERE surat.id_surveillance = surveillance.id_surveillance AND jenis_surat IN ('Pemberitahuan', 'Pengawasan Berkala'))",
+            'tgl_teguran_1' => "(SELECT MAX(tgl_terbit) FROM surat WHERE surat.id_surveillance = surveillance.id_surveillance AND jenis_surat = 'Teguran 1')",
+            'tgl_teguran_2' => "(SELECT MAX(tgl_terbit) FROM surat WHERE surat.id_surveillance = surveillance.id_surveillance AND jenis_surat = 'Teguran 2')",
+            'tgl_pembekuan_1' => "(SELECT MAX(tgl_terbit) FROM surat WHERE surat.id_surveillance = surveillance.id_surveillance AND jenis_surat = 'Pembekuan 1')",
+            'tgl_pembekuan_2' => "(SELECT MAX(tgl_terbit) FROM surat WHERE surat.id_surveillance = surveillance.id_surveillance AND jenis_surat = 'Pembekuan 2')",
+            'keterangan_survailen' => 'surveillance.keterangan',
         ];
 
         // Buat daftar select dengan alias agar nama kolom tetap sama di hasil query
@@ -69,18 +59,20 @@ class RekapController extends Controller
             }
         }
 
-        $query = \DB::table('sertifikasi')
+        $query = \DB::table('surveillance')
+            ->leftJoin('sertifikasi', 'surveillance.id_sertifikasi', '=', 'sertifikasi.id_sertifikasi')
             ->leftJoin('perusahaan', 'sertifikasi.id_perusahaan', '=', 'perusahaan.id_perusahaan')
             ->leftJoin('kategori', 'sertifikasi.id_kategori', '=', 'kategori.id_kategori')
+            ->leftJoin('lab', 'surveillance.id_lab', '=', 'lab.id_lab')
             ->select($selectList);
 
         if (! empty($startYear) && ! empty($endYear)) {
-            $query->whereYear('sertifikasi.tgl_permohonan', '>=', $startYear)
-                ->whereYear('sertifikasi.tgl_permohonan', '<=', $endYear);
+            $query->whereYear('surveillance.tgl_pelaksanaan', '>=', $startYear)
+                ->whereYear('surveillance.tgl_pelaksanaan', '<=', $endYear);
         } elseif (! empty($startYear)) {
-            $query->whereYear('sertifikasi.tgl_permohonan', '>=', $startYear);
+            $query->whereYear('surveillance.tgl_pelaksanaan', '>=', $startYear);
         } elseif (! empty($endYear)) {
-            $query->whereYear('sertifikasi.tgl_permohonan', '<=', $endYear);
+            $query->whereYear('surveillance.tgl_pelaksanaan', '<=', $endYear);
         }
 
         if (! empty($selectedKategori)) {
@@ -103,7 +95,7 @@ class RekapController extends Controller
             $excelData[] = $rowData;
         }
 
-        $fileName = 'rekap_sertifikasi_'.date('Ymd_His').'.xlsx';
+        $fileName = 'rekap_survailen_'.date('Ymd_His').'.xlsx';
 
         $response = new StreamedResponse(function () use ($excelData) {
             $xlsx = \Shuchkin\SimpleXLSXGen::fromArray($excelData);
@@ -125,31 +117,21 @@ class RekapController extends Controller
             'nama_perusahaan' => 'Nama Perusahaan',
             'alamat_kantor' => 'Alamat Kantor',
             'telp_kantor' => 'Telp Kantor',
-            'fax_kantor' => 'Fax Kantor',
             'email' => 'Email',
-            'nama_importir' => 'Nama Importir',
-            'alamat_importir' => 'Alamat Importir',
-            'telp_importir' => 'Telp Importir',
-            'fax_importir' => 'Fax Importir',
-            'kontak_person' => 'Kontak Person',
             'komoditi_produk' => 'Komoditi Produk',
             'merk' => 'Merk',
-            'type_jenis_produk' => 'Tipe/Jenis Produk',
-            'alamat_pabrik' => 'Alamat Pabrik',
-            'telp_pabrik' => 'Telp Pabrik',
-            'fax_pabrik' => 'Fax Pabrik',
-            'tgl_permohonan' => 'Tgl Permohonan',
             'no_sni' => 'No. SNI',
-            'tgl_kontrak' => 'Tgl Kontrak',
-            'tgl_audit_kecukupan' => 'Tgl Audit Kecukupan',
-            'auditor' => 'Auditor',
-            'tgl_mulai_audit_lapangan' => 'Tgl Mulai Audit Lapangan',
-            'tgl_selesai_audit_lapangan' => 'Tgl Selesai Audit Lapangan',
-            'tgl_rapat_teknis' => 'Tgl Rapat Teknis',
-            'tgl_sertifikasi' => 'Tgl Sertifikasi',
-            'lama_sertifikasi' => 'Lama Sertifikasi',
-            'status_permohonan' => 'Status Permohonan',
-            'keterangan' => 'Keterangan',
+            'periode_survailen' => 'Periode Survailen (Ke-)',
+            'tgl_pelaksanaan_survailen' => 'Tgl Pelaksanaan Survailen',
+            'lab_pengujian' => 'Laboratorium Pengujian',
+            'auditor_survailen' => 'Auditor Survailen',
+            'ppc_survailen' => 'PPC Survailen',
+            'tgl_pemberitahuan' => 'Tgl Surat Pemberitahuan',
+            'tgl_teguran_1' => 'Tgl Surat Teguran 1',
+            'tgl_teguran_2' => 'Tgl Surat Teguran 2',
+            'tgl_pembekuan_1' => 'Tgl Surat Pembekuan 1',
+            'tgl_pembekuan_2' => 'Tgl Surat Pembekuan 2',
+            'keterangan_survailen' => 'Keterangan Survailen',
         ];
     }
 }

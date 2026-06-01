@@ -12,7 +12,10 @@ class DashboardController extends Controller
         // 1. Kartu Ringkasan Statistik
         $totalSertifikatAktif = Sertifikasi::whereNotNull('no_sni')->where('no_sni', '!=', '')->count();
         $surveilansTahunIni = Surveilans::whereYear('tgl_pelaksanaan', now()->year)->count();
-        $totalSurat = \App\Models\Surat::count();
+        $suratBreakdown = \App\Models\Surat::selectRaw('jenis_surat, count(*) as total')
+            ->groupBy('jenis_surat')
+            ->get();
+        $totalSurat = $suratBreakdown->sum('total');
         $sertifikasiProses = Sertifikasi::where(function ($q) {
             $q->whereNull('no_sni')->orWhere('no_sni', '');
         })->count();
@@ -107,6 +110,7 @@ class DashboardController extends Controller
             'totalSertifikatAktif',
             'surveilansTahunIni',
             'totalSurat',
+            'suratBreakdown',
             'sertifikasiProses',
             'surveilansMendatang',
             'sertifikasiTertunda',
