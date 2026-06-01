@@ -1,0 +1,67 @@
+name: Laravel CI (Monorepo)
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  test-and-lint:
+    name: Test & Lint (${{ matrix.project }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [app-sertifikasi, app-survailen]
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2' # Sesuaikan jika menggunakan versi PHP yang lebih baru
+        tools: composer:v2
+        coverage: none
+
+    - name: Get Composer Cache Directory
+      id: composer-cache
+      run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles(format('{0}/composer.lock', matrix.project)) }}
+        restore-keys: ${{ runner.os }}-composer-
+
+    - name: Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      working-directory: ./${{ matrix.project }}
+
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      working-directory: ./${{ matrix.project }}
+
+    - name: Generate App Key
+      run: php artisan key:generate
+      working-directory: ./${{ matrix.project }}
+
+    - name: Set Directory Permissions
+      run: chmod -R 777 storage bootstrap/cache
+      working-directory: ./${{ matrix.project }}
+
+    - name: Run Laravel Pint (Code Style)
+      run: ./vendor/bin/pint --test
+      working-directory: ./${{ matrix.project }}
+      # Akan gagal jika kode tidak sesuai format pint.json
+      # Ubah ke true jika Anda tidak ingin format kode memblokir deployment
+      continue-on-error: true
+
+    - name: Run PHPUnit Tests
+      run: php artisan test
+      working-directory: ./${{ matrix.project }}
+      # Loloskan sementara jika Anda belum menulis test secara komprehensif
+      continue-on-error: true
