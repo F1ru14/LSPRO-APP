@@ -105,7 +105,5 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-// Redirect to Sertifikasi App for login
-Route::get('/login', function () {
-    return redirect('http://sertifikasi.localhost/login');
-})->name('login');
+// Redirect unauthenticated users to Sertifikasi login
+Route::get('/login', fn() => redirect('http://sertifikasi.localhost:8000/login'))->name('login');
