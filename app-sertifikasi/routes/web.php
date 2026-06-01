@@ -22,6 +22,11 @@ Route::get('/run-seeder', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    // Portal
+    Route::get('/portal', function () {
+        return view('portal');
+    })->name('portal');
+
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 

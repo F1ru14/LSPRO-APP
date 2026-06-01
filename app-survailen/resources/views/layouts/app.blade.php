@@ -73,11 +73,10 @@
                 </button>
                 <!-- Navigation Portal -->
                 <div class="hidden md:flex items-center space-x-3 ml-2">
-                    <a href="http://sertifikasi.localhost/dashboard" class="px-4 py-1.5 bg-blue-100 text-blue-700 font-semibold rounded-lg hover:bg-blue-200 transition text-sm flex items-center space-x-1" target="_blank">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                        <span>Ke Sertifikasi</span>
+                    <a href="http://sertifikasi.localhost:8000/portal" class="px-4 py-1.5 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition text-sm flex items-center space-x-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        <span>Portal Utama</span>
                     </a>
-                    <a href="/dashboard" class="px-4 py-1.5 bg-emerald-100 text-emerald-700 font-semibold rounded-lg hover:bg-emerald-200 transition text-sm">Dashboard Survailen</a>
                 </div>
                 <div x-data="clock()" x-init="startClock()" class="hidden md:flex items-center space-x-2 text-sm font-medium text-gray-500 bg-gray-50 px-4 py-1.5 rounded-full border border-gray-100">
                     <svg class="w-4 h-4 text-[#0093ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
