@@ -16,20 +16,20 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-6 relative overflow-hidden bg-slate-900">
+<body class="min-h-screen flex flex-col p-6 relative overflow-hidden bg-slate-900">
     
     <!-- Background Image -->
     <div class="absolute inset-0 z-0 pointer-events-none">
-        <img src="{{ asset('images/bg-portal.png') }}" class="w-full h-full object-cover opacity-20" alt="Background">
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/50 to-slate-900/80 mix-blend-multiply"></div>
+        <img src="{{ asset('images/background_apik.png') }}" class="w-full h-full object-cover" alt="Background">
+        <div class="absolute inset-0 bg-slate-900/50"></div>
     </div>
 
     <!-- Decorative Elements -->
     <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-white/20 rounded-full blur-3xl"></div>
     <div class="absolute bottom-[-10%] right-[-10%] w-[30rem] h-[30rem] bg-cyan-400/20 rounded-full blur-3xl"></div>
 
-    <div class="relative z-10 w-full max-w-3xl">
-        <div class="text-center mb-12">
+    <div class="relative z-10 w-full max-w-4xl mx-auto flex flex-col flex-1">
+        <div class="text-center mt-12 md:mt-24 mb-auto">
             <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight drop-shadow-md">
                 Selamat Datang, {{ Auth::user()->name ?? 'Administrator' }}
             </h1>
@@ -38,7 +38,8 @@
             </p>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-6 px-4">
+        <div class="mb-8 md:mb-12">
+            <div class="grid md:grid-cols-2 gap-6 px-4">
             <!-- Card Sertifikasi -->
             <a href="/dashboard" class="glass-card group rounded-2xl p-6 flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer">
                 <div class="w-16 h-16 mb-4 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shadow-inner group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
@@ -69,15 +70,7 @@
                 </div>
             </a>
         </div>
-
-        <div class="mt-16 text-center">
-            <form action="{{ route('logout') }}" method="POST" class="inline">
-                @csrf
-                <button type="submit" class="inline-flex items-center space-x-2 px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-full font-semibold transition-all border border-white/20 backdrop-blur-sm">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                    <span>Keluar / Log Out</span>
-                </button>
-            </form>
+        </div>
         </div>
     </div>
 </body>
