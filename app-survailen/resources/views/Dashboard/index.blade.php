@@ -12,6 +12,18 @@
         </div>
     </div>
 
+    @if (session('status') === 'password-updated')
+        <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-xl flex items-center max-w-4xl shadow-sm" x-data="{ show: true }" x-show="show" x-transition.duration.500ms>
+            <svg class="w-5 h-5 mr-3 flex-shrink-0 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <div class="flex-1">
+                <strong class="font-semibold">Berhasil!</strong> Password Anda telah berhasil diperbarui.
+            </div>
+            <button @click="show = false" class="text-green-500 hover:text-green-700 focus:outline-none ml-4">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+    @endif
+
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 max-w-4xl">
         <!-- Card Survailen Aktif -->
         <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between">

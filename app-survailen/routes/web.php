@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/', 'destroy')->name('destroy');
     });
 
+    Route::put('password', [\App\Http\Controllers\Auth\PasswordController::class, 'update'])->name('password.update');
 
     // Surveilans
     Route::controller(SurveilansController::class)->prefix('surveilans')->name('surveilans.')->group(function () {
