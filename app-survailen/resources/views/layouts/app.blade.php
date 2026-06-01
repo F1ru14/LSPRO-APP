@@ -53,7 +53,7 @@
         </nav>
 
         <div class="p-4 border-t border-blue-400/30">
-            <form action="{{ route('logout') }}" method="POST">
+            <form action="http://sertifikasi.lspro.test:8000/logout" method="POST">
                 @csrf
                 <button type="submit" class="w-full flex items-center justify-start space-x-3 px-4 py-3 rounded-lg hover:bg-white/10 text-white hover:text-red-200 transition border-none cursor-pointer">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
@@ -106,7 +106,7 @@
                         <span class="font-medium">Tema Gelap / Terang</span>
                     </button>
                     <div class="border-t border-gray-100 my-1"></div>
-                    <form action="{{ route('logout') }}" method="POST" class="w-full m-0">
+                    <form action="http://sertifikasi.lspro.test:8000/logout" method="POST" class="w-full m-0">
                         @csrf
                         <button type="submit" class="w-full flex items-center space-x-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition text-left">
                             <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
