@@ -19,14 +19,21 @@ Buka terminal di dalam direktori utama project ini, lalu jalankan perintah:
 docker compose up -d --build
 ```
 
-### 2. Akses Aplikasi
-Setelah semua *container* (Database, App Sertifikasi, dan App Survailen) berhasil berjalan, Anda bisa mengaksesnya melalui browser:
+### 2. Setup Database (Migrate & Seed)
+Karena ini adalah instalasi awal, jalankan perintah berikut untuk membuat tabel database dan mengisi data *dummy* (termasuk *seeder* untuk akun login):
+
+```bash
+docker exec lspro_sertifikasi_app bash -c "php artisan migrate:fresh --seed"
+```
+
+### 3. Akses Aplikasi
+Setelah semua *container* (Database, App Sertifikasi, dan App Survailen) berhasil berjalan dan database di-*setup*, Anda bisa mengaksesnya melalui browser:
 - 🛡️ **Aplikasi Sertifikasi (Utama):** [http://localhost:8000](http://localhost:8000)
 - 📊 **Aplikasi Survailen:** [http://localhost:8001](http://localhost:8001)
 
 *(Catatan: Aplikasi Survailen tidak memiliki halaman login mandiri. Jika Anda mengakses halaman dashboard Survailen dalam keadaan belum login, Anda akan otomatis diarahkan ke halaman login Sertifikasi).*
 
-### 3. Pengaturan Domain Host / SSO (Direkomendasikan)
+### 4. Pengaturan Domain Host / SSO (Direkomendasikan)
 Agar fitur Single Sign-On dan tombol Portal antar aplikasi dapat berjalan sempurna saat pengujian di lokal, disarankan menggunakan domain `.localhost`. 
 Tambahkan konfigurasi berikut ke dalam file `hosts` di sistem operasi Anda (`/etc/hosts` untuk Linux/Mac, atau `C:\Windows\System32\drivers\etc\hosts` untuk Windows):
 
